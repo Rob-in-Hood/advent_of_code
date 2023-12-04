@@ -16,16 +16,17 @@ DIGITS_MAP = {
   "six" => "6",
   "seven" => "7",
   "eight" => "8",
-  "nine" => "9",
+  "nine" => "9"
 }
 
 regex = /#{DIGITS_MAP.keys.join("|")}/
 
 reverse_regex = /#{DIGITS_MAP.keys.map(&:reverse).join("|")}/
 
-p IO.readlines("./adventofcode.com_2023_day_1_input.txt").map{
-  |line|
-    result = line.scan(regex)
-    r_result = line.reverse.scan(reverse_regex)
-    (DIGITS_MAP[result.first] + DIGITS_MAP[r_result.first.reverse]).to_i
-}.sum
+lines = IO.readlines("./adventofcode.com_2023_day_1_input.txt").map do |line|
+  result = line.scan(regex)
+  r_result = line.reverse.scan(reverse_regex)
+  (DIGITS_MAP[result.first] + DIGITS_MAP[r_result.first.reverse]).to_i
+end
+
+p lines.sum
